@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Email:</strong>
+  <%= @student.email %>
+</p>
+
+<p>
+  <strong>Password digest:</strong>
+  <%= @student.password_digest %>
+</p>
+
+<p>
+  <strong>Teacher:</strong>
+  <%= @student.teacher_id %>
+</p>
+
+<%= link_to 'Edit', edit_student_path(@student) %> |
+<%= link_to 'Back', students_path %>
