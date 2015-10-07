@@ -1,10 +1,10 @@
 class StudentsController < ApplicationController
   before_action :set_student, only: [:show, :edit, :update, :destroy]
-
+  before_action :logged_in? #except student can see its own show page/action 
   # GET /students
   # GET /students.json
   def index
-    @students = Student.all
+    @students = Student.where(teacher: @logged_in_teacher)
   end
 
   # GET /students/1
@@ -15,6 +15,7 @@ class StudentsController < ApplicationController
   # GET /students/new
   def new
     @student = Student.new
+    @student.teacher=Teacher.find(params[:id])
   end
 
   # GET /students/1/edit

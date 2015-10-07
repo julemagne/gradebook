@@ -1,5 +1,6 @@
 class ParentsController < ApplicationController
   before_action :set_parent, only: [:show, :edit, :update, :destroy]
+  before_action :logged_in? #only is white list, except is black list
 
   # GET /parents
   # GET /parents.json
@@ -15,6 +16,7 @@ class ParentsController < ApplicationController
   # GET /parents/new
   def new
     @parent = Parent.new
+
   end
 
   # GET /parents/1/edit
@@ -28,11 +30,9 @@ class ParentsController < ApplicationController
 
     respond_to do |format|
       if @parent.save
-        format.html { redirect_to @parent, notice: 'Parent was successfully created.' }
-        format.json { render :show, status: :created, location: @parent }
+        redirect_to @parent, notice: 'Parent was successfully created.'
       else
-        format.html { render :new }
-        format.json { render json: @parent.errors, status: :unprocessable_entity }
+        render :new
       end
     end
   end
@@ -42,11 +42,9 @@ class ParentsController < ApplicationController
   def update
     respond_to do |format|
       if @parent.update(parent_params)
-        format.html { redirect_to @parent, notice: 'Parent was successfully updated.' }
-        format.json { render :show, status: :ok, location: @parent }
+        redirect_to @parent, notice: 'Parent was successfully updated.'
       else
-        format.html { render :edit }
-        format.json { render json: @parent.errors, status: :unprocessable_entity }
+        render :edit
       end
     end
   end
@@ -56,8 +54,7 @@ class ParentsController < ApplicationController
   def destroy
     @parent.destroy
     respond_to do |format|
-      format.html { redirect_to parents_url, notice: 'Parent was successfully destroyed.' }
-      format.json { head :no_content }
+      redirect_to parents_url, notice: 'Parent was successfully destroyed.'
     end
   end
 
@@ -71,4 +68,5 @@ class ParentsController < ApplicationController
     def parent_params
       params.require(:parent).permit(:email, :password_digest, :student_id)
     end
+
 end
