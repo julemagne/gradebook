@@ -1,4 +1,12 @@
 Rails.application.routes.draw do
+  root 'session#new'
+
+  get 'session/new'
+
+  delete 'session/destroy'
+
+  post 'session/create'
+
   resources :students
   resources :parents
   resources :grades
