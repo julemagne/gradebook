@@ -30,6 +30,7 @@ class SessionController < ApplicationController
       end
     else
       redirect_to session_new_path, alert: "Login unsuccessful"
+    end
   end
 
   def destroy
