@@ -1,3 +1,4 @@
 class Parent < ActiveRecord::Base
-  has_many :students
+  belongs_to :student
+  has_secure_password
 end

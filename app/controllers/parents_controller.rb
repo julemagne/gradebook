@@ -27,33 +27,27 @@ class ParentsController < ApplicationController
   # POST /parents.json
   def create
     @parent = Parent.new(parent_params)
-
-    respond_to do |format|
       if @parent.save
         redirect_to @parent, notice: 'Parent was successfully created.'
       else
         render :new
       end
-    end
   end
 
   # PATCH/PUT /parents/1
   # PATCH/PUT /parents/1.json
   def update
-    respond_to do |format|
       if @parent.update(parent_params)
         redirect_to @parent, notice: 'Parent was successfully updated.'
       else
         render :edit
       end
-    end
   end
 
   # DELETE /parents/1
   # DELETE /parents/1.json
   def destroy
     @parent.destroy
-    respond_to do |format|
       redirect_to parents_url, notice: 'Parent was successfully destroyed.'
     end
   end

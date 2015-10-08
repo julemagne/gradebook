@@ -7,8 +7,8 @@ class ApplicationController < ActionController::Base
 
   private
 
-  def logged_in?
-    redirect_to session_path, notice: "You must be logged in to view this page" unless session[:logged_in_teacher]
+  def logged_in_teacher?
+    redirect_to root_path, notice: "You must be logged in to view this page" unless session[:teacher_id]
   end
 
   def set_current_teacher

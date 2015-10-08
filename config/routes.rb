@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   delete 'session/destroy'
 
   post 'session/create'
+
   #make root a different page so that logged in users see dashboard, but all others are redircted to login page
   resources :students
   resources :parents

@@ -1,6 +1,6 @@
 class StudentsController < ApplicationController
   before_action :set_student, only: [:show, :edit, :update, :destroy]
-  before_action :logged_in? #except student can see its own show page/action 
+  before_action :logged_in_teacher? #except student can see its own show page/action
   # GET /students
   # GET /students.json
   def index
@@ -15,7 +15,7 @@ class StudentsController < ApplicationController
   # GET /students/new
   def new
     @student = Student.new
-    @student.teacher=Teacher.find(params[:id])
+    @student.teacher=Teacher.find(session[:teacher_id])
   end
 
   # GET /students/1/edit
@@ -26,40 +26,28 @@ class StudentsController < ApplicationController
   # POST /students.json
   def create
     @student = Student.new(student_params)
-
-    respond_to do |format|
       if @student.save
-        format.html { redirect_to @student, notice: 'Student was successfully created.' }
-        format.json { render :show, status: :created, location: @student }
+        redirect_to @student, notice: 'Student was successfully created.'
       else
-        format.html { render :new }
-        format.json { render json: @student.errors, status: :unprocessable_entity }
+        render :new
       end
-    end
   end
 
   # PATCH/PUT /students/1
   # PATCH/PUT /students/1.json
   def update
-    respond_to do |format|
       if @student.update(student_params)
-        format.html { redirect_to @student, notice: 'Student was successfully updated.' }
-        format.json { render :show, status: :ok, location: @student }
+        redirect_to @student, notice: 'Student was successfully updated.'
       else
-        format.html { render :edit }
-        format.json { render json: @student.errors, status: :unprocessable_entity }
+        render :edit
       end
-    end
   end
 
   # DELETE /students/1
   # DELETE /students/1.json
   def destroy
     @student.destroy
-    respond_to do |format|
-      format.html { redirect_to students_url, notice: 'Student was successfully destroyed.' }
-      format.json { head :no_content }
-    end
+      redirect_to students_url, notice: 'Student was successfully destroyed.'
   end
 
   private

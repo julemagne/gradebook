@@ -25,39 +25,28 @@ class GradesController < ApplicationController
   # POST /grades.json
   def create
     @grade = Grade.new(grade_params)
-
-    respond_to do |format|
       if @grade.save
-        format.html { redirect_to @grade, notice: 'Grade was successfully created.' }
-        format.json { render :show, status: :created, location: @grade }
+        redirect_to @grade, notice: 'Grade was successfully created.'
       else
-        format.html { render :new }
-        format.json { render json: @grade.errors, status: :unprocessable_entity }
+        render :new
       end
-    end
   end
 
   # PATCH/PUT /grades/1
   # PATCH/PUT /grades/1.json
   def update
-    respond_to do |format|
       if @grade.update(grade_params)
-        format.html { redirect_to @grade, notice: 'Grade was successfully updated.' }
-        format.json { render :show, status: :ok, location: @grade }
+        redirect_to @grade, notice: 'Grade was successfully updated.'
       else
-        format.html { render :edit }
-        format.json { render json: @grade.errors, status: :unprocessable_entity }
+        render :edit
       end
-    end
   end
 
   # DELETE /grades/1
   # DELETE /grades/1.json
   def destroy
     @grade.destroy
-    respond_to do |format|
-      format.html { redirect_to grades_url, notice: 'Grade was successfully destroyed.' }
-      format.json { head :no_content }
+      redirect_to grades_url, notice: 'Grade was successfully destroyed.'
     end
   end
 
